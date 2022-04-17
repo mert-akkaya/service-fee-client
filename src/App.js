@@ -1,24 +1,42 @@
-import logo from './logo.svg';
 import './App.css';
+import Main from './Main';
+import {useState} from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { WritedCustomerProvider } from './Context/WritedCustomerContext';
+import { FeeCustomerProvider } from './Context/FeeCustomerContext';
+
 
 function App() {
+  
+  const [background, setBackground] = useState(true);
+
+
+  const handleChangeFile =(e)=>{
+    const { files } = e.target;
+ if (files.length === 0) {
+  return;
+}
+const file = files[0];
+const fileReader = new FileReader();
+
+fileReader.onload = (event) => {
+    // this.background.style.backgroundImage = `url(${fileReader.result})`;
+    setBackground(event.target.result)
+  };
+  fileReader.readAsDataURL(file);
+
+}
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div  style={{backgroundImage: `url(${background})`, backgroundPosition: "center",backgroundRepeat:'no-repeat',height:"100vh"}}>
+      <WritedCustomerProvider>
+      <FeeCustomerProvider>
+        <Main/>
+      </FeeCustomerProvider>
+    </WritedCustomerProvider>
+    <input type="file" onChange={handleChangeFile} />
     </div>
+    
   );
 }
 

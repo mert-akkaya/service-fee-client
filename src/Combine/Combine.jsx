@@ -22,7 +22,7 @@ function Combine({ combines, setCombines }) {
     const calculate = () => {
        feeCustomers.forEach((f)=>writedCustomers.forEach((w)=>{
            if(f.name === w.name){
-             newArr.push(f.name)
+             newArr.push(`${f.name} - ${f.city}`)
            }
        }))
        return newArr

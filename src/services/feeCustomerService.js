@@ -13,4 +13,7 @@ export default class FeeCustomerService{
     delete(customerDeleteModel){
         return axios.post("https://localhost:5001/FeeCustomer/delete",customerDeleteModel);
     }
+    getAllByExcel(file){
+        return axios.post("https://localhost:5001/FeeCustomer/file",file);
+    }
 }
